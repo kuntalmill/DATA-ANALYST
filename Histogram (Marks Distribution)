@@ -2,19 +2,18 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Example numeric column (e.g., Marks or Sales distribution)
-
 df = pd.read_csv(
-    r"C:/Users/LENOVO/Downloads/sales_data_sample 2.csv", encoding="latin1"
+r"C:/Users/LENOVO/Downloads/sales_data_sample 2.csv", encoding="latin1"
 )
 # Create histogram with 10 bins
 plt.figure(figsize=(8, 5))
-plt.hist(df["COUNTRY"], bins=10, color="mediumpurple", edgecolor="black", alpha=0.8)
+plt.hist(df["ORDERNUMBER"], bins=10, color="mediumpurple", edgecolor="black", alpha=0.8)
 
 # Add title and axis labels
-plt.title("COUNTRY NAMES", fontsize=14)
-plt.xlabel("CUSTOMERNAME", fontsize=12)
-plt.ylabel("ORDERNUMBER", fontsize=12)
+plt.title("ORDERNUMBER Distribution", fontsize=14)
+plt.xlabel("ORDERNUMBER", fontsize=12)
+plt.ylabel("Frequency (Number of CUOSTOMER)", fontsize=12)
 plt.grid(axis="y", linestyle="--", alpha=0.5)
-plt.xticks(rotation =45)
+
 plt.tight_layout()
 plt.show()
