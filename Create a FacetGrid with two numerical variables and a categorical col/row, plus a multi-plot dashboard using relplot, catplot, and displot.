@@ -1,0 +1,56 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load built-in dataset
+df = sns.load_dataset("tips")
+
+# Create FacetGrid with categorical column 'time' as columns
+g = sns.FacetGrid(df, col="time", height=4, aspect=1.1)
+
+# Map numerical x ('total_bill') and y ('tip') variables onto each facet
+g.map(plt.scatter, "total_bill", "tip", alpha=0.7)
+g.set_axis_labels("Total Bill ($)", "Tip ($)")
+g.set_titles("Meal Time: {col_name}")
+
+plt.show()
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+
+# 1. Relational plot (numerical vs. numerical by category)
+rel_grid = sns.relplot(
+    data=df,
+    x="total_bill",
+    y="tip",
+    hue="sex",
+    kind="scatter",
+    height=4,
+    aspect=1.1,
+)
+rel_grid.figure.suptitle("Dashboard Panel 1: Relational Plot", y=1.02)
+
+# 2. Categorical plot (categorical vs. numerical)
+cat_grid = sns.catplot(
+    data=df,
+    x="day",
+    y="total_bill",
+    kind="box",
+    height=4,
+    aspect=1.1,
+)
+cat_grid.figure.suptitle("Dashboard Panel 2: Categorical Plot", y=1.02)
+
+# 3. Distribution plot (numerical distribution with KDE)
+dis_grid = sns.displot(
+    data=df,
+    x="total_bill",
+    hue="time",
+    kde=True,
+    height=4,
+    aspect=1.1,
+)
+dis_grid.figure.suptitle("Dashboard Panel 3: Distribution Plot", y=1.02)
+
+plt.show()
