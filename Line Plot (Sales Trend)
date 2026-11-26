@@ -1,0 +1,31 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Load Kaggle Sales Dataset
+df = pd.read_csv(r"C:\Users\LENOVO\Downloads\sales_data.csv")
+df["Date"] = pd.to_datetime(df["Date"])
+df["Month"] = df["Date"].dt.to_period("M").astype(str)
+
+# Aggregate monthly sales
+monthly_sales = df.groupby("Month")["Sales"].sum().reset_index()
+
+# Create line plot
+plt.figure(figsize=(10, 5))
+plt.plot(
+monthly_sales["Month"],
+monthly_sales["Sales"],
+marker="o",
+color="royalblue",
+linewidth=2,
+)
+
+# Add title and axis labels
+plt.title("Monthly Sales Trend", fontsize=14)
+plt.xlabel("Month", fontsize=12)
+plt.ylabel("Total Sales ($)", fontsize=12)
+plt.xticks(rotation=45)
+plt.grid(True, linestyle="--", alpha=0.6)
+
+# Display the plot
+plt.tight_layout()
+plt.show()
