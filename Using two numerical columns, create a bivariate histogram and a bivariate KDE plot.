@@ -1,0 +1,12 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+tips = sns.load_dataset("tips")
+
+plt.figure(figsize=(7, 5))
+sns.kdeplot(data=tips, x="total_bill", y="tip", fill=True, levels=10, thresh=0.05)
+plt.title("Bivariate KDE Plot: Tip vs. Total Bill")
+plt.xlabel("Total Bill ($)")
+plt.ylabel("Tip ($)")
+plt.tight_layout()
+plt.show()
