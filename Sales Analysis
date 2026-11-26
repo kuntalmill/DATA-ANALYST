@@ -1,0 +1,29 @@
+import numpy as np
+
+# Given daily sales data (Day 1 to Day 7)
+sales = np.array([1200, 1500, 900, 2000, 1800, 1700, 1600])
+days = np.arange(1, len(sales) + 1)
+
+# 1. Total weekly sales
+total_sales = np.sum(sales)
+
+# 2. Average daily sales
+avg_sales = np.mean(sales)
+
+# 3. Highest and lowest sales day
+highest_day = np.argmax(sales) + 1  # +1 to convert 0-based index to Day 1-7
+lowest_day = np.argmin(sales) + 1
+
+# 4. Standard deviation of sales
+std_sales = np.std(sales)
+
+# 5. Identify days where sales were above average
+above_avg_days = days[sales > avg_sales]
+above_avg_values = sales[sales > avg_sales]
+
+print(f"1. Total weekly sales: {total_sales}")
+print(f"2. Average daily sales: {avg_sales:.2f}")
+print(f"3. Highest sales day: Day {highest_day} ({sales[highest_day - 1]})")
+print(f"   Lowest sales day:  Day {lowest_day} ({sales[lowest_day - 1]})")
+print(f"4. Standard deviation: {std_sales:.2f}")
+print(f"5. Days above average: {above_avg_days} (Sales: {above_avg_values})")
