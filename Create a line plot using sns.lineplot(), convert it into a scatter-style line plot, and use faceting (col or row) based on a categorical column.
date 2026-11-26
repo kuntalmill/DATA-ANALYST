@@ -1,0 +1,23 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+tips = sns.load_dataset("tips")
+
+sns.lineplot(data=tips, x="total_bill", y="tip")
+plt.title("Line Plot of Tip vs. Total Bill")
+plt.show()
+
+sns.lineplot(data=tips, x="total_bill", y="tip", marker="o", linestyle="-")
+plt.title("Scatter-Style Line Plot of Tip vs. Total Bill")
+plt.show()
+
+g = sns.relplot(
+    data=tips,
+    x="total_bill",
+    y="tip",
+    col="time",
+    kind="line",
+    marker="o"
+)
+g.fig.suptitle("Faceted Line Plot by Time of Day", y=1.03)
+plt.show()
