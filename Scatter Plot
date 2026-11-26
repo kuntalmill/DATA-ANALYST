@@ -1,0 +1,16 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\LENOVO\Downloads\sales_data.csv")
+print("Columns:", df.columns.tolist())
+print(df.head(2))
+
+# Strip accidental leading/trailing spaces from all column names
+df.columns = df.columns.str.strip()
+
+# Print exact column names to verify
+print(df.columns.tolist())
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df["Sales"], df["Date"], color="teal", alpha=0.6, edgecolors="k")
+plt.title("Relationship Between Sales and Profit", fontsize=14)
+plt.show()
