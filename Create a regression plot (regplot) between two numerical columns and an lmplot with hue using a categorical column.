@@ -1,0 +1,13 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+
+plt.figure(figsize=(6, 4))
+sns.regplot(data=df, x="total_bill", y="tip")
+plt.title("Regression Plot of Tip vs. Total Bill")
+plt.show()
+
+g = sns.lmplot(data=df, x="total_bill", y="tip", hue="smoker", height=4, aspect=1.3)
+g.fig.suptitle("Linear Regression by Smoker Status", y=1.02)
+plt.show()
