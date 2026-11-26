@@ -1,25 +1,19 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Load dataset and calculate category share
+# Example numeric column (e.g., Marks or Sales distribution)
+
 df = pd.read_csv(
 r"C:/Users/LENOVO/Downloads/sales_data_sample 2.csv", encoding="latin1"
 )
-market_share = df.groupby("COUNTRY")["SALES"].sum()
+# Create histogram with 10 bins
+plt.figure(figsize=(8, 5))
+plt.hist(df["COUNTRY"], bins=10, color="mediumpurple", edgecolor="black", alpha=0.8)
 
-# Create pie chart with percentage values
-plt.figure(figsize=(7, 7))
-plt.pie(
-market_share.values,
-labels=market_share.index,
-autopct="%1.1f%%",
-startangle=140,
-colors=["#66b3ff", "#99ff99", "#ff9999"],
-)
-
-# Add title
-plt.title("Market Share by COUNTRY", fontsize=14)
-plt.axis("equal") # Ensures pie is drawn as a circle
-
+# Add title and axis labels
+plt.title("COUNTRY NAMES", fontsize=14)
+plt.xlabel("CUSTOMERNAME", fontsize=12)
+plt.ylabel("ORDERNUMBER", fontsize=12)
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.xticks(rotation =45)
 plt.tight_layout()
-plt.show()
