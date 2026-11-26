@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Load dataset and calculate category share
+df = pd.read_csv(
+r"C:/Users/LENOVO/Downloads/sales_data_sample 2.csv", encoding="latin1"
+)
+market_share = df.groupby("COUNTRY")["SALES"].sum()
+
+# Create pie chart with percentage values
+plt.figure(figsize=(7, 7))
+plt.pie(
+market_share.values,
+labels=market_share.index,
+autopct="%1.1f%%",
+startangle=140,
+colors=["#66b3ff", "#99ff99", "#ff9999"],
+)
+
+# Add title
+plt.title("Market Share by COUNTRY", fontsize=14)
+plt.axis("equal") # Ensures pie is drawn as a circle
+
+plt.tight_layout()
+plt.show()
