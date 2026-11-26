@@ -1,0 +1,45 @@
+import pandas as pd
+
+# 1. Create the Sales Dataset
+data = {
+    'Order_ID': (101, 102, 103, 104, 105, 106),
+    'Product': ('Laptop', 'Mouse', 'Keyboard', 'Laptop', 'Monitor', 'Mouse'),
+    'Category': (
+        'Electronics',
+        'Accessories',
+        'Accessories',
+        'Electronics',
+        'Electronics',
+        'Accessories',
+    ),
+    'Region': ('North', 'South', 'East', 'West', 'North', 'East'),
+    'Quantity': (2, 5, 3, 1, 2, 4),
+    'Unit_Price': (800, 25, 50, 800, 300, 25),
+}
+df = pd.DataFrame(data)
+
+# 2. Calculate Total Sales per order
+df['Total_Sales'] = df['Quantity'] * df['Unit_Price']
+print('--- Sales Data ---')
+print(df)
+
+# 3. Basic Summary Metrics
+print('\nTotal Revenue:', df['Total_Sales'].sum())
+print('Average Order Value:', df['Total_Sales'].mean())
+print('Best-Selling Product:', df.groupby('Product')['Quantity'].sum().idxmax())
+
+# 4. Groupby Analysis
+print('\n--- Total Sales by Category ---')
+print(df.groupby('Category')['Total_Sales'].sum())
+
+print('\n--- Total Sales by Region ---')
+print(df.groupby('Region')['Total_Sales'].sum())
+
+# 5. Filter High-Value Orders (> 1000)
+print('\n--- High-Value Orders ---')
+print(df[df['Total_Sales'] > 1000])
+
+# 6. Simple Pandas Plot (No Matplotlib customization)
+df.groupby('Product')['Total_Sales'].sum().plot(
+    kind='bar', title='Total Revenue by Product'
+)
