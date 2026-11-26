@@ -1,0 +1,15 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+sns.pairplot(df, hue="sex")
+plt.show()
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+numeric_df = df.select_dtypes(include="number")
+corr_matrix = numeric_df.corr()
+sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
+plt.show()
