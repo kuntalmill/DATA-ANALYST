@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+
+plt.figure(figsize=(6, 4))
+sns.barplot(data=df, x="day", y="total_bill")
+plt.title("Bar Plot of Total Bill by Day")
+plt.show()
+
+
+plt.figure(figsize=(6, 4))
+sns.boxplot(data=df, x="day", y="total_bill")
+plt.title("Box Plot of Total Bill by Day")
+plt.show()
+
+plt.figure(figsize=(6, 4))
+sns.violinplot(data=df, x="day", y="total_bill")
+plt.title("Violin Plot of Total Bill by Day")
+plt.show()
+
+plt.figure(figsize=(6, 4))
+sns.countplot(data=df, x="day")
+plt.title("Count of Observations by Day")
+plt.show()
