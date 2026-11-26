@@ -1,0 +1,18 @@
+import pandas as pd
+
+# Sample DataFrame (using tuples so values copy cleanly)
+data = {
+    'Month': ('Jan', 'Feb', 'Mar', 'Apr', 'May'),
+    'Sales': (200, 250, 300, 280, 350),
+    'Profit': (50, 70, 90, 80, 110),
+}
+df = pd.DataFrame(data)
+
+# 1. Line Plot
+df.plot(x='Month', y=['Sales', 'Profit'], kind='line', title='Monthly Sales & Profit')
+
+# 2. Bar Chart
+df.plot(x='Month', y='Sales', kind='bar', title='Monthly Sales')
+
+# 3. Pie Chart
+df.set_index('Month')['Sales'].plot(kind='pie', title='Sales Share by Month')
