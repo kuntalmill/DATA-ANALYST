@@ -1,0 +1,42 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\LENOVO\Downloads\sales_data.csv")
+
+df["Year"] = pd.to_datetime(df["Date"]).dt.year
+Sales_df = df.pivot_table(
+    index="Sales", columns="Year", values="Sales", aggfunc="sum"
+).iloc[:, :2]
+
+print(Sales_df)
+
+categories = Sales_df.index
+years = Sales_df.columns
+x = np.arange(len(categories))
+width = 0.35  # Bar width
+
+# Create grouped (multiple) bar plot
+plt.figure(figsize=(9, 5))
+plt.bar(
+    x - width / 2,
+    Sales_df[years[0]],
+    width,
+    label=str(years[0]),
+    color="steelblue",
+)
+plt.bar(
+    x + width / 2,
+    Sales_df[years[1]],
+    width,
+    label=str(years[1]),
+    color="coral",
+)
+
+# Add legend, title, and axis labels
+plt.title("Sales Comparison Across Years by Category", fontsize=14)
+plt.xlabel("Product Category", fontsize=12)
+plt.ylabel("Total Sales ($)", fontsize=12)
+plt.xticks(x, categories)
+plt.legend(title="Year")
+
+plt.tight_layout()
+plt.show()
