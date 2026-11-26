@@ -1,19 +1,33 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Example numeric column (e.g., Marks or Sales distribution)
+# Load dataset and aggregate by Category
+df = pd.read_csv(r"C:\Users\LENOVO\Downloads\sales_data.csv")
 
-df = pd.read_csv(
-r"C:/Users/LENOVO/Downloads/sales_data_sample 2.csv", encoding="latin1"
+date_sales = df.groupby("Date")["Sales"].sum()
+
+# 1. Vertical Bar Chart
+plt.figure(figsize=(8, 4))
+plt.bar(
+date_sales.index,
+date_sales.values,
+color=["#4C72B0", "#55A868", "#C44E52"]
 )
-# Create histogram with 10 bins
-plt.figure(figsize=(8, 5))
-plt.hist(df["COUNTRY"], bins=10, color="mediumpurple", edgecolor="black", alpha=0.8)
-
-# Add title and axis labels
-plt.title("COUNTRY NAMES", fontsize=14)
-plt.xlabel("CUSTOMERNAME", fontsize=12)
-plt.ylabel("ORDERNUMBER", fontsize=12)
-plt.grid(axis="y", linestyle="--", alpha=0.5)
-plt.xticks(rotation =45)
+plt.title("Total Sales by Date (Vertical)", fontsize=14)
+plt.xlabel("Date", fontsize=12)
+plt.ylabel("Total Sales ($)", fontsize=12)
 plt.tight_layout()
+plt.show()
+
+# 2. Horizontal Bar Chart
+plt.figure(figsize=(8, 4))
+plt.barh(
+date_sales.index,
+date_sales.values,
+color=["#4C72B0", "#55A868", "#C44E52"],
+)
+plt.title("Total Sales by Date (Horizontal)", fontsize=14)
+plt.xlabel("Total Sales ($)", fontsize=12)
+plt.ylabel("Date", fontsize=12)
+plt.tight_layout()
+plt.show()
