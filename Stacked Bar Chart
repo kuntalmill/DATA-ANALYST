@@ -1,0 +1,37 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_csv(
+    r"C:/Users/LENOVO/Downloads/sales_data_sample 2.csv", encoding="latin1"
+)
+
+stacked_data = df.pivot_table(
+    index="TERRITORY", 
+    columns="PRODUCTLINE", 
+    values="SALES", 
+    aggfunc="sum",
+    fill_value=0, 
+)
+
+plt.figure(figsize=(9, 5))
+bottom_values = None
+
+for category in stacked_data.columns:
+  plt.bar(
+      stacked_data.index,
+      stacked_data[category],
+      bottom=bottom_values,
+      label=category,
+  )
+  if bottom_values is None:
+    bottom_values = stacked_data[category].copy()
+  else:
+    bottom_values += stacked_data[category]
+
+plt.title("Stacked Sales by Territory and Product Line", fontsize=14)
+plt.xlabel("Territory", fontsize=12)
+plt.ylabel("Total Sales ($)", fontsize=12)
+plt.legend(title="Product Line")
+
+plt.tight_layout()
+plt.show()
